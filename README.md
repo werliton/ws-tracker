@@ -46,3 +46,7 @@ pnpm build
 ```sh
 pnpm lint
 ```
+
+## Referencias
+
+- [Repositório](https://github.com/alura-cursos/alura-tracker/tree/aula-4)
