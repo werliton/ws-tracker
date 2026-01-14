@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import Timer from "./Timer.vue";
 
 export default defineComponent({
   name: "FormComponent",
@@ -20,10 +21,8 @@ export default defineComponent({
       this.timer = 0;
     },
   },
-  computed: {
-    formattedTimer() {
-      return new Date(this.timer * 1000).toISOString().substr(11, 8);
-    },
+  components: {
+    Timer,
   },
 });
 </script>
@@ -42,9 +41,8 @@ export default defineComponent({
         </div>
 
         <div class="column is-4 is-flex is-align-items-center is-justify-content-space-between">
-          <div>
-            <strong class="timer">{{ formattedTimer }}</strong>
-          </div>
+          <Timer :timer="timer" />
+
           <button class="button" @click="startTimer">
             <span class="icon">
               <i class="fas fa-play"></i>
@@ -62,10 +60,3 @@ export default defineComponent({
     </div>
   </div>
 </template>
-
-<style scoped>
-.timer {
-  font-variant-numeric: tabular-nums;
-  color: #0d3b66;
-}
-</style>
