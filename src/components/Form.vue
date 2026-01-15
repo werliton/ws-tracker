@@ -1,28 +1,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import Timer from "./Timer.vue";
+
+import Stopwatch from "./Stopwatch.vue";
 
 export default defineComponent({
   name: "FormComponent",
-  data() {
-    return {
-      timer: 0,
-      timerId: 0,
-    };
-  },
-  methods: {
-    startTimer() {
-      this.timerId = setInterval(() => {
-        this.timer++;
-      }, 1000);
-    },
-    stopTimer() {
-      clearInterval(this.timerId);
-      this.timer = 0;
-    },
-  },
   components: {
-    Timer,
+    Stopwatch,
   },
 });
 </script>
@@ -39,23 +23,7 @@ export default defineComponent({
             placeholder="Qual tarefa você deseja iniciar?"
           />
         </div>
-
-        <div class="column is-4 is-flex is-align-items-center is-justify-content-space-between">
-          <Timer :timer="timer" />
-
-          <button class="button" @click="startTimer">
-            <span class="icon">
-              <i class="fas fa-play"></i>
-            </span>
-            <span>play</span>
-          </button>
-          <button class="button" @click="stopTimer">
-            <span class="icon">
-              <i class="fas fa-stop"></i>
-            </span>
-            <span>stop</span>
-          </button>
-        </div>
+        <Stopwatch />
       </div>
     </div>
   </div>
