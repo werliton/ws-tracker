@@ -9,7 +9,7 @@
       <span>Novo projeto</span>
     </router-link>
 
-    <table class="table is-fullwidth">
+    <table class="table is-fullwidth is-striped is-primary">
       <thead>
         <tr>
           <th>ID</th>

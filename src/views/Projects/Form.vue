@@ -5,7 +5,7 @@
     <form @submit.prevent="salvar">
       <div class="field">
         <label for="projectName" class="label">Nome do Projeto</label>
-        <input type="text" class="input" v-model="projectName" id="projectName" />
+        <input type="text" class="input is-normal" v-model="projectName" id="projectName" />
       </div>
 
       <div class="field">

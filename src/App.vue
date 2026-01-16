@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import SidebarComponent from "./components/Sidebar.vue";
+import Notification from "./components/Notification.vue";
 
 export default defineComponent({
   name: "App",
@@ -11,6 +12,7 @@ export default defineComponent({
   },
   components: {
     SidebarComponent,
+    Notification,
   },
   methods: {
     switchTheme(darkMode: boolean) {
@@ -26,6 +28,7 @@ export default defineComponent({
       <SidebarComponent @switch-theme="switchTheme" />
     </div>
     <div class="column is-three-quarters conteudo">
+      <Notification />
       <router-view></router-view>
     </div>
   </main>
