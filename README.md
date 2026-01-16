@@ -49,4 +49,6 @@ pnpm lint
 
 ## Referencias
 
-- [Repositório](https://github.com/alura-cursos/alura-tracker/tree/aula-4)
+- [VUE3 - Conhecendo o framework](https://github.com/alura-cursos/alura-tracker/tree/aula-4)
+- [VUE3 - Avançando no framework](https://github.com/alura-cursos/tracker-2/tree/aula-5)
+- [VUE3 - Compositin vs Vuex ](https://github.com/alura-cursos/tracker-3/tree/aula-4)
