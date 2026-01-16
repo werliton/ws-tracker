@@ -1,11 +1,13 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
-import Timer from "./Timer.vue";
 import type { TTask } from "@/types";
+import BoxComponent from "./Box.vue";
+import Timer from "./Timer.vue";
 
 export default defineComponent({
   name: "TaskComponent",
   components: {
+    BoxComponent,
     Timer,
   },
   props: {
@@ -17,18 +19,12 @@ export default defineComponent({
 });
 </script>
 <template>
-  <div class="box has-text-weight-bold">
+  <BoxComponent v-if="task.description">
     <div class="columns">
-      <div class="column is-7">{{ task.description }}</div>
+      <div class="column is-7">{{ task.description || "Tarefa nao cadastrada" }}</div>
       <div class="column">
         <Timer :timer="task.timer || 0" />
       </div>
     </div>
-  </div>
+  </BoxComponent>
 </template>
-
-<style scoped>
-.box {
-  background-color: #fafaf0;
-}
-</style>
