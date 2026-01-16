@@ -28,7 +28,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="box has-background-white">
+  <div class="box form">
     <div class="columns">
       <div class="column is-flex" aria-label="Formulário para criacao de uma nova tarefa">
         <div class="column is-8">
@@ -45,3 +45,14 @@ export default defineComponent({
     </div>
   </div>
 </template>
+
+<style>
+input {
+  background-color: var(--bg-primario);
+  color: var(--texto-primario);
+}
+.form {
+  color: var(--texto-primario);
+  background-color: var(--bg-primario);
+}
+</style>

@@ -26,6 +26,6 @@ export default defineComponent({
 <style scoped>
 .timer {
   font-variant-numeric: tabular-nums;
-  color: #0d3b66;
+  color: var(--texto-primario);
 }
 </style>
