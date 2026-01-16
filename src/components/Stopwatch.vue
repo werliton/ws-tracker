@@ -20,13 +20,15 @@ export default defineComponent({
     },
     stopTimer() {
       clearInterval(this.timerId);
-      this.timer = 0;
       this.isActiveTimer = false;
+      this.$emit("isTimerFinished", this.timer);
+      this.timer = 0;
     },
   },
   components: {
     Timer,
   },
+  emits: ["isTimerFinished"],
 });
 </script>
 

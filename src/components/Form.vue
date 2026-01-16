@@ -1,12 +1,28 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, type InputHTMLAttributes } from "vue";
 
 import Stopwatch from "./Stopwatch.vue";
 
 export default defineComponent({
   name: "FormComponent",
+  data() {
+    return {
+      isfinished: false,
+      inputTask: "",
+    };
+  },
   components: {
     Stopwatch,
+  },
+  emits: ["startedTask"],
+  methods: {
+    finishTask(timer: string) {
+      this.$emit("startedTask", {
+        time: timer,
+        task: this.inputTask,
+      });
+      this.inputTask = "";
+    },
   },
 });
 </script>
@@ -21,9 +37,10 @@ export default defineComponent({
             name="task"
             class="input"
             placeholder="Qual tarefa você deseja iniciar?"
+            v-model="inputTask"
           />
         </div>
-        <Stopwatch />
+        <Stopwatch @is-timer-finished="finishTask" />
       </div>
     </div>
   </div>
