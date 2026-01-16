@@ -26,7 +26,7 @@ export default defineComponent({
   methods: {
     changeTheme() {
       this.darkMode = !this.darkMode;
-      this.$emit("switchTheme", this.darkMode);
+      this.$emit("switch-theme", this.darkMode);
     },
   },
   computed: {
@@ -35,6 +35,6 @@ export default defineComponent({
       return "Ativar Dark Mode";
     },
   },
-  emits: ["switchTheme"],
+  emits: ["switch-theme"],
 });
 </script>
