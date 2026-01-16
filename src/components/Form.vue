@@ -1,14 +1,16 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 
 import Stopwatch from "./Stopwatch.vue";
+import { key } from "@/store";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "FormComponent",
   data() {
     return {
-      isfinished: false,
       inputTask: "",
+      projectId: "",
     };
   },
   components: {
@@ -16,13 +18,21 @@ export default defineComponent({
   },
   emits: ["startedTask"],
   methods: {
-    finishTask(timer: string) {
+    saveTask(timer: string) {
       this.$emit("startedTask", {
         timer,
         description: this.inputTask,
+        project: this.projects.find((item) => item.id == this.projectId),
       });
       this.inputTask = "";
     },
+  },
+  setup() {
+    const store = useStore(key);
+
+    return {
+      projects: computed(() => store.state.projects),
+    };
   },
 });
 </script>
@@ -31,7 +41,7 @@ export default defineComponent({
   <div class="box form">
     <div class="columns">
       <div class="column is-flex" aria-label="Formulário para criacao de uma nova tarefa">
-        <div class="column is-8">
+        <div class="column is-5">
           <input
             type="text"
             name="task"
@@ -40,7 +50,19 @@ export default defineComponent({
             v-model="inputTask"
           />
         </div>
-        <Stopwatch @is-timer-finished="finishTask" />
+
+        <div class="column is-3">
+          <div class="select">
+            <select v-model="projectId">
+              <option value="">Selecione o projeto</option>
+              <option :value="project.id" v-for="project in projects" :key="project.id">
+                {{ project.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <Stopwatch @is-timer-finished="saveTask" />
       </div>
     </div>
   </div>
