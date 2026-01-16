@@ -27,6 +27,7 @@
 
 <script lang="ts">
 import { useStore } from "@/store";
+import { ADD_PROJECT, EDIT_PROJECT } from "@/store/mutation.type";
 import type { TProject } from "@/types/project";
 import { defineComponent } from "vue";
 
@@ -53,12 +54,12 @@ export default defineComponent({
   methods: {
     salvar() {
       if (this.id) {
-        this.store.commit("EDIT_PROJECT", {
+        this.store.commit(EDIT_PROJECT, {
           id: this.id,
           name: this.projectName,
         });
       } else {
-        this.store.commit("ADD_PROJECT", this.projectName);
+        this.store.commit(ADD_PROJECT, this.projectName);
       }
       this.projectName = "";
       this.$router.push("/projects");
