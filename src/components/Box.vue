@@ -14,6 +14,10 @@ export default defineComponent({
 </script>
 <template>
   <div class="box has-text-weight-bold" :style="estilos">
-    <slot></slot>
+    <div class="columns">
+      <div class="column is-7">
+        <slot></slot>
+      </div>
+    </div>
   </div>
 </template>
