@@ -1,6 +1,6 @@
 import type { TProject } from "@/types/project";
 import type { InjectionKey } from "vue";
-import { createStore, Store } from "vuex";
+import { createStore, Store, useStore as vuexUseStore } from "vuex";
 
 interface State {
   projects: TProject[];
@@ -10,11 +10,20 @@ export const key: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore<State>({
   state: {
-    projects: [
-      {
+    projects: [],
+  },
+  mutations: {
+    ADD_PROJECT(state: State, projectName: string) {
+      const project = {
         id: new Date().toISOString(),
-        name: "teste vuex2026",
-      },
-    ],
+        name: projectName,
+      } as TProject;
+
+      state.projects.push(project);
+    },
   },
 });
+
+export function useStore(): Store<State> {
+  return vuexUseStore(key);
+}

@@ -40,25 +40,29 @@
 </style>
 
 <script lang="ts">
-import type { TProject } from "@/types/project";
-import { defineComponent } from "vue";
+import { useStore } from "@/store";
+import { computed, defineComponent } from "vue";
 
 export default defineComponent({
   name: "ProjectsComponent",
   data() {
     return {
       projectName: "",
-      projetos: [] as TProject[],
     };
   },
   methods: {
     salvar() {
-      this.projetos.push({
-        id: new Date().toISOString(),
-        name: this.projectName,
-      });
+      this.store.commit("ADD_PROJECT", this.projectName);
+
       this.projectName = "";
     },
+  },
+  setup() {
+    const store = useStore();
+    return {
+      store,
+      projetos: computed(() => store.state.projects),
+    };
   },
 });
 </script>
