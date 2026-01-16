@@ -18,8 +18,8 @@ export default defineComponent({
   methods: {
     finishTask(timer: string) {
       this.$emit("startedTask", {
-        time: timer,
-        task: this.inputTask,
+        timer,
+        description: this.inputTask,
       });
       this.inputTask = "";
     },

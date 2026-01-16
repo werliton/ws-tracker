@@ -3,14 +3,13 @@ import { defineComponent } from "vue";
 import FormComponent from "./components/Form.vue";
 import SidebarComponent from "./components/Sidebar.vue";
 import TaskComponent from "./components/Task.vue";
-
-type Task = { time: number; task: string };
+import type { TTask } from "./types";
 
 export default defineComponent({
   name: "App",
   data() {
     return {
-      tasks: [] as Task[],
+      tasks: [] as TTask[],
     };
   },
   components: {
@@ -19,8 +18,7 @@ export default defineComponent({
     TaskComponent,
   },
   methods: {
-    listTask(task: Task) {
-      console.log("Tarefa cadastrada:", task);
+    saveTask(task: TTask) {
       this.tasks.push(task);
     },
   },
@@ -33,13 +31,11 @@ export default defineComponent({
       <SidebarComponent />
     </div>
     <div class="column is-three-quarters has-background-white">
-      <FormComponent @started-task="listTask" />
+      <FormComponent @started-task="saveTask" />
       <div class="column">
-        <ul>
-          <li v-for="task in tasks" :key="task.task" class="list">
-            <TaskComponent :timer="task.time" :description="task.task" />
-          </li>
-        </ul>
+        <div class="list">
+          <TaskComponent v-for="(task, index) in tasks" :key="index" :task="task" />
+        </div>
       </div>
     </div>
   </main>
