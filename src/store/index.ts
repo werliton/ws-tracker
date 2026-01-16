@@ -21,6 +21,10 @@ export const store = createStore<State>({
 
       state.projects.push(project);
     },
+    EDIT_PROJECT(state: State, project: TProject) {
+      const foundProject = state.projects.findIndex((item) => item.id === project.id);
+      state.projects[foundProject] = project;
+    },
   },
 });
 

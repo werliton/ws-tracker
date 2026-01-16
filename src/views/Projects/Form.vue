@@ -21,15 +21,30 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  align-items: flex-start;
 }
 </style>
 
 <script lang="ts">
 import { useStore } from "@/store";
+import type { TProject } from "@/types/project";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ProjectsComponent",
+  props: {
+    id: {
+      type: String,
+    },
+  },
+  mounted() {
+    if (this.id) {
+      const project = this.store.state.projects.find(
+        (item: TProject) => item.id === this.id
+      ) as TProject;
+      this.projectName = project?.name || "";
+    }
+  },
   data() {
     return {
       projectName: "",
@@ -37,7 +52,14 @@ export default defineComponent({
   },
   methods: {
     salvar() {
-      this.store.commit("ADD_PROJECT", this.projectName);
+      if (this.id) {
+        this.store.commit("EDIT_PROJECT", {
+          id: this.id,
+          name: this.projectName,
+        });
+      } else {
+        this.store.commit("ADD_PROJECT", this.projectName);
+      }
       this.projectName = "";
       this.$router.push("/projects");
     },
