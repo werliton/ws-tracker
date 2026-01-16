@@ -22,7 +22,7 @@ export default defineComponent({
       this.$emit("startedTask", {
         timer,
         description: this.inputTask,
-        project: this.projects.find((item) => item.id == this.projectId),
+        project: this.projects.find((item: string) => item.id == this.projectId),
       });
       this.inputTask = "";
     },

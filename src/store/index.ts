@@ -13,7 +13,7 @@ export const store = createStore<State>({
     projects: [
       {
         id: new Date().toISOString(),
-        name: "teste vuex",
+        name: "teste vuex2026",
       },
     ],
   },
