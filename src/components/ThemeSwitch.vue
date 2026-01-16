@@ -1,15 +1,19 @@
 <template>
-  <div class="column">
-    <button class="button" :class="{ switch: darkMode }" @click="changeTheme">
+  <div class="column container">
+    <button class="button is-black" :class="{ switch: darkMode }" @click="changeTheme">
+      <i class="fas" :class="{ 'fas fa-sun': darkMode, 'fas fa-moon': !darkMode }"></i>
       {{ buttonText }}
     </button>
   </div>
 </template>
 
 <style scoped>
+.container {
+  padding: 1rem 0;
+}
 .switch {
-  background-color: var(--bg-primario);
-  color: var(--texto-primario);
+  background-color: #fff;
+  color: #000;
 }
 </style>
 
