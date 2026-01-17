@@ -26,8 +26,9 @@
 </style>
 
 <script lang="ts">
+import { notificar } from "@/mixis";
 import { useStore } from "@/store";
-import { ADD_PROJECT, EDIT_PROJECT, NOTIFY } from "@/store/mutation.type";
+import { ADD_PROJECT, EDIT_PROJECT } from "@/store/mutation.type";
 import { NotificationType } from "@/types/notification";
 import type { TProject } from "@/types/project";
 import { defineComponent } from "vue";
@@ -39,6 +40,7 @@ export default defineComponent({
       type: String,
     },
   },
+  mixins:[notificar],
   mounted() {
     if (this.id) {
       const project = this.store.state.projects.find(
@@ -63,11 +65,7 @@ export default defineComponent({
         this.store.commit(ADD_PROJECT, this.projectName);
       }
       this.projectName = "";
-      this.store.commit(NOTIFY, {
-        title: "Projeto cadastrado!",
-        text: "Seu projeto foi cadastrado com sucesso :)",
-        type: NotificationType.SUCCESS,
-      });
+      this.notificar("Projeto cadastrado!", "Seu projeto foi cadastrado com sucesso :)", NotificationType.SUCCESS)
       this.$router.push("/projects");
     },
   },

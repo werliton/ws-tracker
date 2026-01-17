@@ -34,13 +34,6 @@ export default defineComponent({
         this.notificar("Verifique isso.","Sua tarefa precisa estar vinculada com um Projeto)",  NotificationType.ERROR)
       }
     },
-    // notificar(title: string, text: string, type: NotificationType){
-    //   this.store.commit(NOTIFY, {
-    //       title,
-    //       text,
-    //       type
-    //     });
-    // }
   },
   setup() {
     const store = useStore(key);
