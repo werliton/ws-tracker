@@ -4,8 +4,8 @@ import { computed, defineComponent } from "vue";
 import Stopwatch from "./Stopwatch.vue";
 import { key } from "@/store";
 import { useStore } from "vuex";
-import { NOTIFY } from "@/store/mutation.type";
 import { NotificationType } from "@/types/notification";
+import { notificar } from "@/mixis";
 
 export default defineComponent({
   name: "FormComponent",
@@ -18,6 +18,7 @@ export default defineComponent({
   components: {
     Stopwatch,
   },
+  mixins:[notificar],
   emits: ["startedTask"],
   methods: {
     saveTask(timer: string) {
@@ -30,13 +31,16 @@ export default defineComponent({
         this.inputTask = "";
         this.projectId = ''
       } else {
-        this.store.commit(NOTIFY, {
-          title: "Verifique isso.",
-          text: "Sua tarefa precisa estar vinculada com um Projeto)",
-          type: NotificationType.ERROR,
-        });
+        this.notificar("Verifique isso.","Sua tarefa precisa estar vinculada com um Projeto)",  NotificationType.ERROR)
       }
     },
+    // notificar(title: string, text: string, type: NotificationType){
+    //   this.store.commit(NOTIFY, {
+    //       title,
+    //       text,
+    //       type
+    //     });
+    // }
   },
   setup() {
     const store = useStore(key);
