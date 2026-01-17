@@ -26,7 +26,7 @@
 </style>
 
 <script lang="ts">
-import { notificar } from "@/mixis";
+import { useNotification } from "@/hooks/useNotification";
 import { useStore } from "@/store";
 import { ADD_PROJECT, EDIT_PROJECT } from "@/store/mutation.type";
 import { NotificationType } from "@/types/notification";
@@ -40,7 +40,6 @@ export default defineComponent({
       type: String,
     },
   },
-  mixins:[notificar],
   mounted() {
     if (this.id) {
       const project = this.store.state.projects.find(
@@ -71,8 +70,11 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const { notificar } = useNotification()
+
     return {
       store,
+      notificar
     };
   },
 });
