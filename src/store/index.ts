@@ -1,7 +1,8 @@
-import { NotificationType, type TNotification } from "@/types/notification";
+import { type TNotification } from "@/types/notification";
 import type { TProject } from "@/types/project";
 import type { InjectionKey } from "vue";
 import { createStore, Store, useStore as vuexUseStore } from "vuex";
+import { NOTIFY } from "./mutation.type";
 
 interface State {
   projects: TProject[];
@@ -13,14 +14,7 @@ export const key: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
   state: {
     projects: [],
-    notifications: [
-      {
-        id: 1,
-        text: "teste",
-        tipo: NotificationType.SUCCESS,
-        title: "ere",
-      },
-    ] as TNotification[],
+    notifications: [],
   },
   mutations: {
     ADD_PROJECT(state: State, projectName: string) {
@@ -37,6 +31,14 @@ export const store = createStore<State>({
     },
     REMOVE_PROJECT(state: State, projectId: string) {
       state.projects = state.projects.filter((item) => item.id != projectId);
+    },
+    [NOTIFY](state: State, notification: TNotification) {
+      notification.id = Date.now();
+      state.notifications.push(notification);
+
+      setTimeout(() => {
+        state.notifications = state.notifications.filter((item) => item.id !== notification.id);
+      }, 2000);
     },
   },
 });

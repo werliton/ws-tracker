@@ -2,7 +2,7 @@
   <div class="notificacoes">
     <article
       class="message is-success"
-      :class="context[notification.tipo]"
+      :class="context[notification.type]"
       v-for="notification in notifications"
       :key="notification.id"
     >

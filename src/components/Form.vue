@@ -4,6 +4,8 @@ import { computed, defineComponent } from "vue";
 import Stopwatch from "./Stopwatch.vue";
 import { key } from "@/store";
 import { useStore } from "vuex";
+import { NOTIFY } from "@/store/mutation.type";
+import { NotificationType } from "@/types/notification";
 
 export default defineComponent({
   name: "FormComponent",
@@ -19,12 +21,21 @@ export default defineComponent({
   emits: ["startedTask"],
   methods: {
     saveTask(timer: string) {
-      this.$emit("startedTask", {
-        timer,
-        description: this.inputTask,
-        project: this.projects.find((item: string) => item.id == this.projectId),
-      });
-      this.inputTask = "";
+      if(this.projectId){
+        this.$emit("startedTask", {
+          timer,
+          description: this.inputTask,
+          project: this.projects.find((item) => item.id == this.projectId),
+        });
+        this.inputTask = "";
+        this.projectId = ''
+      } else {
+        this.store.commit(NOTIFY, {
+          title: "Verifique isso.",
+          text: "Sua tarefa precisa estar vinculada com um Projeto)",
+          type: NotificationType.ERROR,
+        });
+      }
     },
   },
   setup() {
@@ -32,6 +43,7 @@ export default defineComponent({
 
     return {
       projects: computed(() => store.state.projects),
+      store
     };
   },
 });

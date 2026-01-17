@@ -1,7 +1,5 @@
 <template>
   <section class="projetos">
-    <h1 class="title">Projetos</h1>
-
     <router-link to="/projects/new" class="button">
       <span class="icon is-smal">
         <i class="fas fa-plus"></i>
@@ -50,7 +48,8 @@
 
 <script lang="ts">
 import { useStore } from "@/store";
-import { REMOVE_PROJECT } from "@/store/mutation.type";
+import { NOTIFY, REMOVE_PROJECT } from "@/store/mutation.type";
+import { NotificationType } from "@/types/notification";
 import { computed, defineComponent } from "vue";
 
 export default defineComponent({
@@ -65,6 +64,11 @@ export default defineComponent({
   methods: {
     remove(id: string) {
       this.store.commit(REMOVE_PROJECT, id);
+      this.store.commit(NOTIFY, {
+        title: "Remoção de Projeto",
+        text: "Projeto deletado com sucesso",
+        type: NotificationType.WARNNING,
+      });
     },
   },
 });

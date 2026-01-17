@@ -7,6 +7,6 @@ export enum NotificationType {
 export type TNotification = {
   title: string;
   text: string;
-  tipo: NotificationType;
+  type: NotificationType;
   id: number;
 };
