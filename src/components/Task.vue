@@ -21,8 +21,9 @@ export default defineComponent({
 <template>
   <BoxComponent v-if="task.description">
     <div class="columns">
-      <div class="column is-7">{{ task.description || "Tarefa nao cadastrada" }}</div>
-      <div class="column">
+      <div class="column is-4">{{ task.description || "Tarefa nao cadastrada" }}</div>
+      <div class="column is-3">{{ task.project.name }}</div>
+      <div class="column ">
         <Timer :timer="task.timer || 0" />
       </div>
     </div>

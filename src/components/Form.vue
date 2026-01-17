@@ -50,6 +50,7 @@ export default defineComponent({
   <div class="box form">
     <div class="columns">
       <div class="column is-flex" aria-label="Formulário para criacao de uma nova tarefa">
+
         <div class="column is-5">
           <input
             type="text"
