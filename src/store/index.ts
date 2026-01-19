@@ -2,7 +2,9 @@ import { type TNotification } from "@/types/notification";
 import type { TProject } from "@/types/project";
 import type { InjectionKey } from "vue";
 import { createStore, Store, useStore as vuexUseStore } from "vuex";
-import { NOTIFY } from "./mutation.type";
+import { DEFINE_PROJECTS, NOTIFY } from "./mutation.type";
+import { GET_PROJECTS } from "./action.type";
+import httpClient from "@/http";
 
 interface State {
   projects: TProject[];
@@ -40,7 +42,16 @@ export const store = createStore<State>({
         state.notifications = state.notifications.filter((item) => item.id !== notification.id);
       }, 2000);
     },
+    [DEFINE_PROJECTS](state: State, projects: TProject[]){
+      state.projects = projects
+    }
   },
+  actions: {
+    [GET_PROJECTS]({ commit }){
+      httpClient.get('projects')
+      .then(response => commit(DEFINE_PROJECTS, response.data))
+    }
+  }
 });
 
 export function useStore(): Store<State> {

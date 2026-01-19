@@ -48,6 +48,7 @@
 
 <script lang="ts">
 import { useStore } from "@/store";
+import { GET_PROJECTS } from "@/store/action.type";
 import { NOTIFY, REMOVE_PROJECT } from "@/store/mutation.type";
 import { NotificationType } from "@/types/notification";
 import { computed, defineComponent } from "vue";
@@ -56,6 +57,8 @@ export default defineComponent({
   name: "ListComponent",
   setup() {
     const store = useStore();
+    store.dispatch(GET_PROJECTS)
+
     return {
       projetos: computed(() => store.state.projects),
       store,
