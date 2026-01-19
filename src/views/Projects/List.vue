@@ -48,9 +48,7 @@
 
 <script lang="ts">
 import { useStore } from "@/store";
-import { GET_PROJECTS } from "@/store/action.type";
-import { NOTIFY, REMOVE_PROJECT } from "@/store/mutation.type";
-import { NotificationType } from "@/types/notification";
+import { GET_PROJECTS, REMOVE_PROJECT } from "@/store/action.type";
 import { computed, defineComponent } from "vue";
 
 export default defineComponent({
@@ -66,12 +64,8 @@ export default defineComponent({
   },
   methods: {
     remove(id: string) {
-      this.store.commit(REMOVE_PROJECT, id);
-      this.store.commit(NOTIFY, {
-        title: "Remoção de Projeto",
-        text: "Projeto deletado com sucesso",
-        type: NotificationType.WARNNING,
-      });
+      this.store.dispatch(REMOVE_PROJECT, id)
+      this.store.dispatch(GET_PROJECTS)
     },
   },
 });

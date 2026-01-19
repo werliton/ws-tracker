@@ -28,7 +28,8 @@
 <script lang="ts">
 import { useNotification } from "@/hooks/useNotification";
 import { useStore } from "@/store";
-import { ADD_PROJECT, EDIT_PROJECT } from "@/store/mutation.type";
+import { ADD_PROJECT } from "@/store/action.type";
+import { EDIT_PROJECT } from "@/store/mutation.type";
 import { NotificationType } from "@/types/notification";
 import type { TProject } from "@/types/project";
 import { defineComponent } from "vue";
@@ -56,17 +57,20 @@ export default defineComponent({
   methods: {
     salvar() {
       if (this.id) {
-        this.store.commit(EDIT_PROJECT, {
+        this.store.dispatch(EDIT_PROJECT, {
           id: this.id,
           name: this.projectName,
-        });
+        }).then(this.onSuccess);
       } else {
-        this.store.commit(ADD_PROJECT, this.projectName);
+        this.store.dispatch(ADD_PROJECT, this.projectName)
+          .then(this.onSuccess);
       }
+    },
+    onSuccess() {
       this.projectName = "";
       this.notificar("Projeto cadastrado!", "Seu projeto foi cadastrado com sucesso :)", NotificationType.SUCCESS)
       this.$router.push("/projects");
-    },
+    }
   },
   setup() {
     const store = useStore();
